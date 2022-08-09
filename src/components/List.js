@@ -23,7 +23,7 @@ const Input = styled.input`
 function List() {
   const searchKey = 'name';
   const searchRange = 'public';
-  const pageNum = 2;
+  const pageNum = 1;
   const perPage = 10;
   const [value, setValue] = useState('');
   const [repos, setRepos] = useState([]);
@@ -37,20 +37,23 @@ function List() {
   };
   //value
   useEffect(() => {
-    const fetchRepos = async () => {
-      const octokit = new Octokit({
-        auth: '',
-      });
-      const response = await octokit.request(
-        `GET /search/repositories?q=${value}in:${searchKey}is:${searchRange}&page=${pageNum}&per_page=${perPage}`
-      );
+    if (value.length > 0) {
+      console.log(value.length);
+      const fetchRepos = async () => {
+        const octokit = new Octokit({
+          auth: '',
+        });
+        const response = await octokit.request(
+          `GET /search/repositories?q=${value}+in%3A${searchKey}+is%3A${searchRange}&page=${pageNum}&per_page=${perPage}`
+        );
+        //value가 입력되지 않을 때
 
-      //결과값이 존재하지 않을때 처리 필요
-      setRepos(response);
-      setLoading(false);
-    };
+        setRepos(response);
+        setLoading(false);
+      };
 
-    fetchRepos();
+      fetchRepos();
+    }
   }, [value]);
 
   return (
