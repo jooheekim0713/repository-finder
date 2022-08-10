@@ -30,24 +30,8 @@ const Button = styled.button`
   }
 `;
 
-const PageBtnWrapper = styled.div`
-  display: inline-block;
-`;
-
-const PageBtn = styled.button`
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
 const Cards = ({ repos }) => {
-  const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
   const [cards, setCards] = useState([]);
-  const [urls, setUrls] = useState([]);
   const data = repos.data.items;
 
   useEffect(() => {
@@ -55,25 +39,6 @@ const Cards = ({ repos }) => {
       setCards(data);
     }
   }, [data]);
-
-  useEffect(() => {
-    if (repos.headers?.link) {
-      const link = repos.headers.link;
-      const links = link.split(',');
-      setUrls(
-        links.map((ele) => {
-          return {
-            url: ele.split(';')[0].replace('<', '').replace('>', ''),
-            title: ele
-              .split(';')[1]
-              .replace('rel="', '')
-              .replace('"', '')
-              .trim(),
-          };
-        })
-      );
-    }
-  }, [repos.headers?.link]);
 
   return (
     <>
@@ -91,11 +56,6 @@ const Cards = ({ repos }) => {
               </ListItem>
             ))}
           </List>
-          <PageBtnWrapper>
-            {urls.map((ele) => (
-              <PageBtn key={ele.title}>{ele.title}</PageBtn>
-            ))}
-          </PageBtnWrapper>
         </>
       )}
     </>
