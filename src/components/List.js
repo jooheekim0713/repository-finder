@@ -2,7 +2,10 @@ import { Octokit } from '@octokit/core';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { fetchRepos } from '../api';
+import { repoState, urlState } from '../atom';
 import Cards from './Cards';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import Pagination from './Pagination';
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,22 +24,6 @@ const Input = styled.input`
   border-radius: 15px;
 `;
 
-const PageBtnWrapper = styled.div`
-  display: inline-block;
-`;
-
-const PageBtn = styled.button`
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  border: none;
-  background: transparent;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
 function List() {
   const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
   const searchKey = 'name';
@@ -44,9 +31,9 @@ function List() {
   const pageNum = 1;
   const perPage = 10;
   const [value, setValue] = useState('');
-  const [repos, setRepos] = useState([]);
+  const [repos, setRepos] = useRecoilState(repoState);
   const [loading, setLoading] = useState(true);
-  const [urls, setUrls] = useState([]);
+  const setUrls = useSetRecoilState(urlState);
 
   const onChange = (event) => {
     const {
@@ -72,34 +59,6 @@ function List() {
     }
   }, [value]);
 
-  useEffect(() => {
-    if (repos.headers?.link) {
-      const link = repos.headers.link;
-      const links = link.split(',');
-      setUrls(
-        links.map((ele) => {
-          return {
-            url: ele.split(';')[0].replace('<', '').replace('>', ''),
-            title: ele
-              .split(';')[1]
-              .replace('rel="', '')
-              .replace('"', '')
-              .trim(),
-          };
-        })
-      );
-    }
-  }, [repos.headers?.link]);
-
-  const renderPage = (ele) => {
-    const url = ele.url;
-    const queries = url.split('q=')[1];
-    const values = queries.split('+')[0];
-    const pageNum = queries.split('page=')[1].split('&')[0];
-    fetchRepos(values, pageNum) //
-      .then((response) => setRepos(response));
-  };
-
   return (
     <Wrapper>
       <Container>
@@ -114,13 +73,7 @@ function List() {
         ) : (
           <>
             <Cards repos={repos} />
-            <PageBtnWrapper>
-              {urls.map((ele) => (
-                <PageBtn key={ele.title} onClick={() => renderPage(ele)}>
-                  {ele.title}
-                </PageBtn>
-              ))}
-            </PageBtnWrapper>
+            <Pagination repos={repos} />
           </>
         )}
       </Container>
