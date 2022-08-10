@@ -21,6 +21,7 @@ const Input = styled.input`
 `;
 
 function List() {
+  const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
   const searchKey = 'name';
   const searchRange = 'public';
   const pageNum = 1;
@@ -35,24 +36,20 @@ function List() {
     } = event;
     setValue(value);
   };
-  //value
+
   useEffect(() => {
     if (value.length > 0) {
-      console.log(value.length);
-      const fetchRepos = async () => {
+      const fetchRepo = async () => {
         const octokit = new Octokit({
-          auth: '',
+          auth: ACCESS_TOKEN,
         });
         const response = await octokit.request(
           `GET /search/repositories?q=${value}+in%3A${searchKey}+is%3A${searchRange}&page=${pageNum}&per_page=${perPage}`
         );
-        //value가 입력되지 않을 때
-
         setRepos(response);
         setLoading(false);
       };
-
-      fetchRepos();
+      fetchRepo();
     }
   }, [value]);
 
