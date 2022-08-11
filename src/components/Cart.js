@@ -1,9 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { ItemState } from '../atom';
+import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
   display: flex;
@@ -71,9 +72,14 @@ function Cart() {
             <List>
               {items.map((cart, index) => (
                 <ListItem key={index}>
-                  {cart.repoOwner}
-                  {'/'}
-                  {cart.repoName}
+                  <Link
+                    to={`/issues`}
+                    state={{ owner: cart.repoOwner, name: cart.repoName }}
+                  >
+                    {cart.repoOwner}
+                    {'/'}
+                    {cart.repoName}
+                  </Link>
                   <Button onClick={() => onClick(index)}>
                     <FontAwesomeIcon icon={faTrashCan} />
                   </Button>
