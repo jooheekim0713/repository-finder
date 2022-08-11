@@ -2,6 +2,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
+import { ItemState } from '../atom';
+import { useRecoilState } from 'recoil';
 
 const Message = styled.h3`
   color: black;
@@ -32,7 +34,7 @@ const Button = styled.button`
 
 const Cards = ({ repos }) => {
   const [cards, setCards] = useState([]);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useRecoilState(ItemState);
   const data = repos.data.items;
 
   useEffect(() => {
@@ -41,34 +43,38 @@ const Cards = ({ repos }) => {
     }
   }, [data]);
 
-  const addItem = (card) => {
-    const repoOwner = card.owner.login;
-    const repoName = card.name;
-    const itemObj = {
-      owner: repoOwner,
-      name: repoName,
-    };
-    validItems(itemObj, repoOwner, repoName) //
-      .then(localStorage.setItem('items', JSON.stringify(items)));
+  useEffect(() => {
+    if (items.length === 4) {
+      localStorage.setItem('repos', JSON.stringify(items));
+    }
+  }, [items]);
+
+  const onClick = (card) => {
+    validItem(card);
   };
 
-  const validItems = async (itemObj, repoOwner, repoName) => {
-    const validItem = items.map(
+  const validItem = (card) => {
+    const repoOwner = card.owner.login;
+    const repoName = card.name;
+    const checkItem = items.map(
       (ele) => repoOwner === ele.owner && repoName === ele.name
     );
     if (items.length < 4) {
-      if (validItem.includes(true)) {
-        alert('기존에 등록된 repository입니다.');
-        return;
+      //checkItem.includes 확인안됨
+      if (checkItem.includes(true)) {
+        alert('기존에 등록된 repository 입니다.');
       } else {
-        setItems((current) => [...current, itemObj]);
+        addItem(repoOwner, repoName);
       }
     } else {
       alert(
-        '저장할 수 있는 repo 개수를 초과했습니다.\n(저장할 수 있는 repo 개수는 4개 입니다.)'
+        '저장할 수 있는 repository 갯수를 초과했습니다. \n저장가능한 repository 갯수는 4개입니다.'
       );
-      return;
     }
+  };
+
+  const addItem = (repoOwner, repoName) => {
+    setItems((current) => [...current, { repoOwner, repoName }]);
   };
 
   return (
@@ -80,7 +86,7 @@ const Cards = ({ repos }) => {
           {cards.map((card) => (
             <ListItem key={card.id}>
               {card.full_name}
-              <Button onClick={() => addItem(card)}>
+              <Button onClick={() => onClick(card)}>
                 <FontAwesomeIcon icon={faPlus} />
               </Button>
             </ListItem>

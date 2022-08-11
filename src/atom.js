@@ -9,3 +9,8 @@ export const urlState = atom({
   key: 'url',
   default: [],
 });
+
+export const ItemState = atom({
+  key: 'items',
+  default: [],
+});

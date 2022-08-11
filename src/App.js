@@ -1,11 +1,11 @@
 import './App.css';
-import List from './components/List';
 import { RecoilRoot } from 'recoil';
+import Router from './Router';
 
 function App() {
   return (
     <RecoilRoot>
-      <List />
+      <Router />
     </RecoilRoot>
   );
 }

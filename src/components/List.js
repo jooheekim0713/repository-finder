@@ -1,11 +1,13 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { Octokit } from '@octokit/core';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { fetchRepos } from '../api';
 import { repoState, urlState } from '../atom';
 import Cards from './Cards';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import Pagination from './Pagination';
+import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,13 +17,28 @@ const Wrapper = styled.div`
   align-items: center;
   background-color: #fff;
 `;
-
 const Container = styled.div``;
+const Button = styled.button`
+  font-size: 32px;
+  background-color: transparent;
+  border: none;
+  float: right;
+  padding: 0;
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 const Input = styled.input`
   width: 300px;
   height: 30px;
   border-radius: 15px;
+`;
+
+const Header = styled.header`
+  width: 100%;
+  height: 10vh;
+  font-size: 32px;
 `;
 
 function List() {
@@ -62,6 +79,12 @@ function List() {
   return (
     <Wrapper>
       <Container>
+        <Header>Repository finder</Header>
+        <Link to={`/cart`}>
+          <Button>
+            <FontAwesomeIcon icon={faCartShopping} />
+          </Button>
+        </Link>
         <Input
           type="text"
           value={value}
