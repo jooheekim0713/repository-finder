@@ -49,28 +49,39 @@ const Button = styled.button`
 `;
 
 function Cart() {
-  const [carts, setCarts] = useState(JSON.parse(localStorage.getItem('repos')));
   const [items, setItems] = useRecoilState(ItemState);
 
-  const onClick = (cart) => {
-    console.log('clicked', cart);
+  const onClick = (index) => {
+    const itemsArr = [...items];
+    itemsArr.splice(index, 1);
+    setItems(itemsArr);
   };
+  useEffect(() => {
+    localStorage.setItem('repos', JSON.stringify(items));
+  }, [items]);
+
   return (
     <Wrapper>
       <Container>
         <Header>Repository cart</Header>
-        <List>
-          {carts.map((cart, index) => (
-            <ListItem key={index}>
-              {cart.repoOwner}
-              {'/'}
-              {cart.repoName}
-              <Button onClick={() => onClick(cart)}>
-                <FontAwesomeIcon icon={faTrashCan} />
-              </Button>
-            </ListItem>
-          ))}
-        </List>
+        <>
+          {items.length === 0 ? (
+            <Message>저장된 repository가 없습니다.</Message>
+          ) : (
+            <List>
+              {items.map((cart, index) => (
+                <ListItem key={index}>
+                  {cart.repoOwner}
+                  {'/'}
+                  {cart.repoName}
+                  <Button onClick={() => onClick(index)}>
+                    <FontAwesomeIcon icon={faTrashCan} />
+                  </Button>
+                </ListItem>
+              ))}
+            </List>
+          )}
+        </>
       </Container>
     </Wrapper>
   );

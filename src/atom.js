@@ -12,5 +12,5 @@ export const urlState = atom({
 
 export const ItemState = atom({
   key: 'items',
-  default: [],
+  default: JSON.parse(localStorage.getItem('repos')) || [],
 });
