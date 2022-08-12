@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { ItemState } from '../atom';
+import { itemState } from '../atom';
 import { useRecoilState } from 'recoil';
 
 const Message = styled.h3`
@@ -34,7 +34,7 @@ const Button = styled.button`
 
 const Cards = ({ repos }) => {
   const [cards, setCards] = useState([]);
-  const [items, setItems] = useRecoilState(ItemState);
+  const [items, setItems] = useRecoilState(itemState);
   const data = repos.data.items;
 
   useEffect(() => {

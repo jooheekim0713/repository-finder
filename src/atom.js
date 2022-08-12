@@ -10,7 +10,12 @@ export const urlState = atom({
   default: [],
 });
 
-export const ItemState = atom({
+export const itemState = atom({
   key: 'items',
   default: JSON.parse(localStorage.getItem('repos')) || [],
+});
+
+export const issueState = atom({
+  key: 'issues',
+  default: [],
 });

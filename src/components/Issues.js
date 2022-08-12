@@ -1,34 +1,37 @@
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { Octokit } from '@octokit/core';
+import { Link, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { fetchIssues } from '../api';
 import IssuePagination from './Issue-pagination';
+import { useRecoilState } from 'recoil';
+import { issueState } from '../atom';
 
 const Wrapper = styled.div`
   display: flex;
-  height: 100vh;
   width: 100vw;
   justify-content: center;
   align-items: center;
   background-color: #fff;
+  overflow: visible;
 `;
+
 const Container = styled.div``;
 
 const Header = styled.header`
   width: 100%;
   height: 10vh;
-  font-size: 32px;
+  font-size: 48px;
 `;
 
 const Message = styled.h3`
-  color: black;
+  color: gray;
 `;
 
 const List = styled.ul`
   margin-top: 10px;
   padding: 0;
 `;
+
 const ListItem = styled.li`
   list-style-type: none;
   padding: 10px 20px;
@@ -36,18 +39,49 @@ const ListItem = styled.li`
   border: 1px solid black;
   border-radius: 15px;
   background-color: #fff;
+  a {
+    text-decoration: none;
+    color: black;
+  }
+`;
+
+const Card = styled.div``;
+
+const UserProfile = styled.div`
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  margin-bottom: 16px;
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+`;
+
+const UserImg = styled.img`
+  width: 48px;
+  height: 48px;
+  border-radius: 48px;
+  margin-right: 12px;
+`;
+
+const UserName = styled.h1`
+  margin-bottom: 0;
+  font-size: 16px;
 `;
 
 function Issues() {
   const { state } = useLocation();
-  const [cards, setCards] = useState([]);
+  const [issues, setIssues] = useRecoilState(issueState);
   const repoOwner = state.owner;
   const repoName = state.name;
 
   useEffect(() => {
     fetchIssues(repoOwner, repoName) //
-      .then((response) => setCards(response.data));
-  }, []);
+      .then((response) => setIssues(response.data));
+  });
 
   return (
     <Wrapper>
@@ -57,13 +91,27 @@ function Issues() {
           {'/'}
           {repoName}
         </Header>
-        {cards.length === 0 ? (
+        {issues.length === 0 ? (
           <Message> NO ISSUE</Message>
         ) : (
           <>
+            <Message>카드 선택시 해당 Github 이슈 창이 뜹니다.</Message>
             <List>
-              {cards.map((card) => (
-                <ListItem key={card.id}>{card.title}</ListItem>
+              {issues.map((card) => (
+                <ListItem key={card.id}>
+                  <a href={card.html_url}>
+                    <Card>
+                      <UserProfile>
+                        <UserImg src={card.user.avatar_url} />
+                        <div>
+                          <UserName>{card.user.login}</UserName>
+                          <span>{card.created_at}</span>
+                        </div>
+                      </UserProfile>
+                      {card.title}
+                    </Card>
+                  </a>
+                </ListItem>
               ))}
             </List>
           </>

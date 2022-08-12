@@ -3,12 +3,11 @@ import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { ItemState } from '../atom';
+import { itemState } from '../atom';
 import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
   display: flex;
-  height: 100vh;
   width: 100vw;
   justify-content: center;
   align-items: center;
@@ -50,7 +49,7 @@ const Button = styled.button`
 `;
 
 function Cart() {
-  const [items, setItems] = useRecoilState(ItemState);
+  const [items, setItems] = useRecoilState(itemState);
 
   const onClick = (index) => {
     const itemsArr = [...items];
