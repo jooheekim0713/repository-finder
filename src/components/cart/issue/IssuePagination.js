@@ -29,7 +29,7 @@ function IssuePagination({ owner, name }) {
 
   useEffect(() => {
     fetchIssues(owner, name, page) //
-      .then((response) => setLink(response.headers?.link));
+      .then((response) => setLink(response.headers?.link ?? []));
   }, [owner, name, page]);
 
   useEffect(() => {
