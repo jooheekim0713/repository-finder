@@ -7,7 +7,7 @@ function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/issues" element={<Issues />} />
+        <Route path="/issues/:owner/:name" element={<Issues />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/" element={<List />} />
       </Routes>
