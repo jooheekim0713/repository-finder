@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { fetchIssues } from '../api';
-import IssuePagination from './Issue-pagination';
+import IssuePagination from './IssuePagination';
 import { useRecoilState } from 'recoil';
 import { issueState } from '../atom';
 
@@ -12,7 +12,6 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #fff;
-  overflow: visible;
 `;
 
 const Container = styled.div``;
@@ -81,7 +80,7 @@ function Issues() {
   useEffect(() => {
     fetchIssues(repoOwner, repoName) //
       .then((response) => setIssues(response.data));
-  });
+  }, []);
 
   return (
     <Wrapper>
@@ -92,7 +91,7 @@ function Issues() {
           {repoName}
         </Header>
         {issues.length === 0 ? (
-          <Message> NO ISSUE</Message>
+          <>repository에 issue가 존재하지 않습니다.</>
         ) : (
           <>
             <Message>카드 선택시 해당 Github 이슈 창이 뜹니다.</Message>
@@ -114,6 +113,7 @@ function Issues() {
                 </ListItem>
               ))}
             </List>
+            <IssuePagination owner={repoOwner} name={repoName} />
           </>
         )}
       </Container>
