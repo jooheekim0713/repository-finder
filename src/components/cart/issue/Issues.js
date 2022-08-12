@@ -18,58 +18,9 @@ const Wrapper = styled.div`
 const Container = styled.div``;
 
 const Header = styled.header`
-  width: 100%;
-  height: 10vh;
-  font-size: 48px;
-`;
-
-const Message = styled.h3`
-  color: gray;
-`;
-
-const List = styled.ul`
-  margin-top: 10px;
-  padding: 0;
-`;
-
-const ListItem = styled.li`
-  list-style-type: none;
-  padding: 10px 20px;
-  margin: 4px 0;
-  border: 1px solid black;
-  border-radius: 15px;
-  background-color: #fff;
-  a {
-    text-decoration: none;
-    color: black;
-  }
-`;
-
-const Card = styled.div``;
-
-const UserProfile = styled.div`
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  width: 100%;
-  margin-bottom: 16px;
-  div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-`;
-
-const UserImg = styled.img`
-  width: 48px;
-  height: 48px;
-  border-radius: 48px;
-  margin-right: 12px;
-`;
-
-const UserName = styled.h1`
-  margin-bottom: 0;
-  font-size: 16px;
+  text-align: center;
+  font-size: 32px;
+  margin: 3vh 0;
 `;
 
 function Issues() {

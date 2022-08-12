@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
   display: flex;
+  height: 100vh;
   width: 100vw;
   justify-content: center;
   align-items: center;
@@ -16,8 +17,8 @@ const Wrapper = styled.div`
 const Container = styled.div``;
 
 const Header = styled.header`
-  width: 100%;
-  height: 10vh;
+  height: 8vh;
+  text-align: center;
   font-size: 32px;
 `;
 
@@ -26,6 +27,7 @@ const Message = styled.h3`
 `;
 
 const List = styled.ul`
+  width: 25vw;
   margin-top: 10px;
   padding: 0;
 `;
@@ -76,7 +78,7 @@ function Cart() {
               {items.map((cart, index) => (
                 <ListItem key={index}>
                   <Link
-                    to={`/issues`}
+                    to={`/issues/${cart.repoOwner}/${cart.repoName}`}
                     state={{ owner: cart.repoOwner, name: cart.repoName }}
                   >
                     {cart.repoOwner}

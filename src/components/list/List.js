@@ -22,13 +22,15 @@ const Container = styled.div``;
 
 const Header = styled.header`
   width: 100%;
-  height: 10vh;
+  text-align: center;
+  height: 8vh;
   font-size: 32px;
 `;
 
 const Button = styled.button`
   font-size: 32px;
   background-color: transparent;
+  border-right: 5px;
   border: none;
   float: right;
   padding: 0;
