@@ -3,9 +3,9 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { Octokit } from '@octokit/core';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { repoState, urlState } from '../../atom';
+import { itemState, repoState, urlState } from '../../atom';
 import Cards from './Cards';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import Pagination from './Pagination';
 import { Link } from 'react-router-dom';
 
@@ -17,7 +17,14 @@ const Wrapper = styled.div`
   align-items: center;
   background-color: #fff;
 `;
+
 const Container = styled.div``;
+
+const Header = styled.header`
+  width: 100%;
+  height: 10vh;
+  font-size: 32px;
+`;
 
 const Button = styled.button`
   font-size: 32px;
@@ -36,10 +43,20 @@ const Input = styled.input`
   border-radius: 15px;
 `;
 
-const Header = styled.header`
-  width: 100%;
-  height: 10vh;
-  font-size: 32px;
+const CartBox = styled.div`
+  position: relative;
+`;
+
+const CartNumBox = styled.div`
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  height: 20px;
+  width: 20px;
+  font-size: 15px;
+  border-radius: 20px;
+  color: white;
+  background-color: transparent;
 `;
 
 function List() {
@@ -52,6 +69,7 @@ function List() {
   const [repos, setRepos] = useRecoilState(repoState);
   const [loading, setLoading] = useState(true);
   const setUrls = useSetRecoilState(urlState);
+  const item = useRecoilValue(itemState);
 
   const onChange = (event) => {
     const {
@@ -83,7 +101,10 @@ function List() {
         <Header>Repository finder</Header>
         <Link to={`/cart`}>
           <Button>
-            <FontAwesomeIcon icon={faCartShopping} />
+            <CartBox>
+              <CartNumBox>{item.length}</CartNumBox>
+              <FontAwesomeIcon icon={faCartShopping} />
+            </CartBox>
           </Button>
         </Link>
         <Input
