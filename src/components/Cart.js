@@ -36,6 +36,10 @@ const ListItem = styled.li`
   border: 1px solid black;
   border-radius: 15px;
   background-color: #fff;
+  a {
+    text-decoration: none;
+    color: black;
+  }
 `;
 
 const Button = styled.button`
