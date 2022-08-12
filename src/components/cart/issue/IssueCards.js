@@ -21,7 +21,9 @@ const ListItem = styled.li`
   }
 `;
 
-const Card = styled.div``;
+const Card = styled.div`
+  overflow: hidden;
+`;
 
 const UserProfile = styled.div`
   position: relative;
