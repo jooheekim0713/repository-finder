@@ -5,6 +5,7 @@ import { fetchIssues } from '../../../api';
 import IssuePagination from './IssuePagination';
 import { useRecoilState } from 'recoil';
 import { issueState } from '../../../atom';
+import IssueCards from './IssueCards';
 
 const Wrapper = styled.div`
   display: flex;
@@ -94,25 +95,7 @@ function Issues() {
           <>repository에 issue가 존재하지 않습니다.</>
         ) : (
           <>
-            <Message>카드 선택시 해당 Github 이슈 창이 뜹니다.</Message>
-            <List>
-              {issues.map((card) => (
-                <ListItem key={card.id}>
-                  <a href={card.html_url}>
-                    <Card>
-                      <UserProfile>
-                        <UserImg src={card.user.avatar_url} />
-                        <div>
-                          <UserName>{card.user.login}</UserName>
-                          <span>{card.created_at}</span>
-                        </div>
-                      </UserProfile>
-                      {card.title}
-                    </Card>
-                  </a>
-                </ListItem>
-              ))}
-            </List>
+            <IssueCards />
             <IssuePagination owner={repoOwner} name={repoName} />
           </>
         )}
