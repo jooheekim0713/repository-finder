@@ -13,6 +13,7 @@ const List = styled.ul`
   margin-top: 10px;
   padding: 0;
 `;
+
 const ListItem = styled.li`
   list-style-type: none;
   padding: 10px 20px;
@@ -57,10 +58,10 @@ const Cards = ({ repos }) => {
     const repoOwner = card.owner.login;
     const repoName = card.name;
     const checkItem = items.map(
-      (ele) => repoOwner === ele.owner && repoName === ele.name
+      (ele) => repoOwner === ele.repoOwner && repoName === ele.repoName
     );
+
     if (items.length < 4) {
-      //checkItem.includes 확인안됨
       if (checkItem.includes(true)) {
         alert('기존에 등록된 repository 입니다.');
       } else {
