@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { fetchRepos } from '../../api';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import { repoState, urlState } from '../../atom';
@@ -42,8 +42,8 @@ const Pagination = ({ repos }) => {
       );
     }
   }, [repos.headers?.link]);
-
   //urls 버튼 first prev next last 순서로 보이도록 하기
+
   const renderPage = (ele) => {
     const url = ele.url;
     const queries = url.split('q=')[1];

@@ -33,6 +33,10 @@ const UserProfile = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    span {
+      font-size: 13px;
+      color: gray;
+    }
   }
 `;
 
@@ -50,6 +54,11 @@ const UserName = styled.h1`
 
 function IssueCards() {
   const issues = useRecoilValue(issueState);
+  const dateToString = (date) => {
+    const result = new Date(date).toLocaleString('en-US');
+    return result;
+  };
+
   return (
     <List>
       {issues.map((card) => (
@@ -60,7 +69,7 @@ function IssueCards() {
                 <UserImg src={card.user.avatar_url} />
                 <div>
                   <UserName>{card.user.login}</UserName>
-                  <span>{card.created_at}</span>
+                  <span>{dateToString(card.created_at)}</span>
                 </div>
               </UserProfile>
               {card.title}

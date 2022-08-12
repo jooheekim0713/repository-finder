@@ -1,8 +1,14 @@
-# Getting Started with Create React App
+# Repository finder
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+깃허브의 공개 repository를 검색하고 원하는 repository를 선택한 후 선택한 repository의 issue를 볼 수 있는 웹 어플리케이션입니다.
 
-## Available Scripts
+## 사용한 hook
+
+- recoil
+- react-router-dom
+- styled-components
+- fontawesome
+- octokit
 
 In the project directory, you can run:
 
