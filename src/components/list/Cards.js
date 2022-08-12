@@ -69,7 +69,7 @@ const Cards = ({ repos }) => {
       }
     } else {
       alert(
-        '저장할 수 있는 repository 갯수를 초과했습니다. \n저장가능한 repository 갯수는 4개입니다.'
+        '저장할 수 있는 repository 개수를 초과했습니다. \n저장가능한 repository 개수는 4개입니다.'
       );
     }
   };
