@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { fetchIssues } from '../api';
-import { issueState } from '../atom';
+import { fetchIssues } from '../../../api';
+import { issueState } from '../../../atom';
 
 const PageBtnWrapper = styled.div`
   display: inline-block;

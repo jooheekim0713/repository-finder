@@ -3,7 +3,7 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { Octokit } from '@octokit/core';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { repoState, urlState } from '../atom';
+import { repoState, urlState } from '../../atom';
 import Cards from './Cards';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import Pagination from './Pagination';
@@ -18,6 +18,7 @@ const Wrapper = styled.div`
   background-color: #fff;
 `;
 const Container = styled.div``;
+
 const Button = styled.button`
   font-size: 32px;
   background-color: transparent;

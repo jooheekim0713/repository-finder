@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { fetchRepos } from '../api';
+import { fetchRepos } from '../../api';
 import { useSetRecoilState, useRecoilState } from 'recoil';
-import { repoState, urlState } from '../atom';
+import { repoState, urlState } from '../../atom';
 
 const PageBtnWrapper = styled.div`
   display: inline-block;

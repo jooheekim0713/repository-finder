@@ -3,7 +3,7 @@ import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { itemState } from '../atom';
+import { itemState } from '../../atom';
 import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
