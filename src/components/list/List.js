@@ -36,6 +36,7 @@ const Button = styled.button`
   padding: 0;
   &:hover {
     cursor: pointer;
+    scale: calc(1.1);
   }
 `;
 
@@ -47,6 +48,7 @@ const Input = styled.input`
 
 const CartBox = styled.div`
   position: relative;
+  color: black;
 `;
 
 const CartNumBox = styled.div`
@@ -101,14 +103,14 @@ function List() {
     <Wrapper>
       <Container>
         <Header>Repository finder</Header>
-        <Link to={`/cart`}>
-          <Button>
+        <Button>
+          <Link to={`/cart`}>
             <CartBox>
               <CartNumBox>{item.length}</CartNumBox>
               <FontAwesomeIcon icon={faCartShopping} />
             </CartBox>
-          </Button>
-        </Link>
+          </Link>
+        </Button>
         <Input
           type="text"
           value={value}

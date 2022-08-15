@@ -78,7 +78,7 @@ function Cart() {
               {items.map((cart, index) => (
                 <ListItem key={index}>
                   <Link
-                    to={`/issues/${cart.repoOwner}/${cart.repoName}`}
+                    to={`/cart/${cart.repoOwner}/${cart.repoName}`}
                     state={{ owner: cart.repoOwner, name: cart.repoName }}
                   >
                     {cart.repoOwner}
