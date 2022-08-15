@@ -12,6 +12,7 @@ const Message = styled.h3`
 const List = styled.ul`
   margin-top: 10px;
   padding: 0;
+  width: 350px;
 `;
 
 const ListItem = styled.li`
@@ -21,6 +22,7 @@ const ListItem = styled.li`
   border: 1px solid black;
   border-radius: 15px;
   background-color: #fff;
+  overflow: hidden;
 `;
 
 const Button = styled.button`

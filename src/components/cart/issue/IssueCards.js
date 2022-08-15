@@ -6,6 +6,7 @@ const List = styled.ul`
   width: 25vw;
   margin-top: 10px;
   padding: 0;
+  width: 400px;
 `;
 
 const ListItem = styled.li`

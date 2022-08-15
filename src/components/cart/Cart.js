@@ -30,6 +30,7 @@ const List = styled.ul`
   width: 25vw;
   margin-top: 10px;
   padding: 0;
+  width: 300px;
 `;
 const ListItem = styled.li`
   list-style-type: none;
