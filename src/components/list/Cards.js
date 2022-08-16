@@ -68,6 +68,7 @@ const Cards = ({ repos }) => {
         alert('기존에 등록된 repository 입니다.');
       } else {
         addItem(repoOwner, repoName);
+        alert(repoOwner + '/' + repoName + ' 이 등록되었습니다.');
       }
     } else {
       alert(
