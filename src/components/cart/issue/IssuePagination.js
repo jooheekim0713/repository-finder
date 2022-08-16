@@ -53,9 +53,13 @@ function IssuePagination({ owner, name }) {
   const renderPage = (ele) => {
     const url = ele.url;
     setPage(url.split('&page=')[1].split('&per_page')[0]);
+  };
+
+  useEffect(() => {
     fetchIssues(owner, name, page) //
       .then((response) => setIssues(response.data));
-  };
+  }, [page]);
+
   return (
     <PageBtnWrapper>
       {urls.map((ele) => (
