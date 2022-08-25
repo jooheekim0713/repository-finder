@@ -4,9 +4,9 @@ import { Octokit } from '@octokit/core';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { itemState, repoState, urlState } from '../../atom';
-import Cards from './Cards';
+import Cards from './card';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import Pagination from './Pagination';
+import Pagination from './pagination';
 import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`

@@ -1,6 +1,6 @@
 import './App.css';
 import { RecoilRoot } from 'recoil';
-import Router from './Router';
+import Router from './router';
 
 function App() {
   return (

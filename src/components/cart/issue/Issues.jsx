@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { fetchIssues } from '../../../api';
-import IssuePagination from './IssuePagination';
+import IssuePagination from './issue-pagination';
 import { useRecoilState } from 'recoil';
 import { issueState } from '../../../atom';
-import IssueCards from './IssueCards';
+import IssueCards from './issue-card';
 
 const Wrapper = styled.div`
   display: flex;

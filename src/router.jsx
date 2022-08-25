@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Cart from './components/cart/Cart';
+import Cart from './components/cart/cart';
 import Issues from './components/cart/issue/Issues';
-import List from './components/list/List';
+import List from './components/list/list';
 
 function Router() {
   return (
